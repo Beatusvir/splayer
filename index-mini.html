@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>sPlayer</title>
-  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/mini.css">
 </head>
 
 <body>
@@ -13,8 +13,8 @@
   </div>
   <div class="tools">
     <img src="./images/settings.png" class="clickable" alt="Settings" title="Settings">
-    <button id="show-mini-player">-</button>
-    <button id="close-player">x</button>
+    <button id="show-player">+</button>
+    <button id="close-mini-player">x</button>
   </div>
   <div class="playing">
     <div class="track-info">
@@ -36,16 +36,15 @@
     require('./renderer.js')
     const ipcRenderer = require('electron').ipcRenderer
 
-    let miniPlayerButton = document.getElementById('show-mini-player')
+    let restorePlayerButton = document.getElementById('show-player')
     miniPlayerButton.addEventListener('click', function () {
-      ipcRenderer.send('show-mini-player')
+      ipcRenderer.send('show-player')
     })
 
-    let closeButton = document.getElementById('close-player')
+    let closeButton = document.getElementById('close-mini-player')
     miniPlayerButton.addEventListener('click', function () {
       ipcRenderer.send('close-player')
     })
-
 </script>
 
 </html>
