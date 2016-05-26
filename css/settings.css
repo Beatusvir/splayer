@@ -1,0 +1,61 @@
+body {
+  width: 500px;
+  height: 500px;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  -webkit-app-region: drag;
+}
+
+.tools{
+  display: flex;
+  flex-direction: row;
+  width: 496px;
+  padding: 0 2px 0 2px;
+  height: 60px;
+}
+
+button {
+  -webkit-app-region: no-drag;
+}
+button:focus {
+  outline: none;
+}
+
+.tools button {
+  margin-left: auto;
+  background-color: inherit;
+  border: none;
+  width: 100px;
+}
+
+.tools button:hover {
+  cursor: pointer;
+  background-color: #efefef;
+  text-shadow: 0 0 1px #aaa;
+}
+
+ul {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #ccc;
+}
+
+li {
+  list-style: none;
+  padding: 20px;
+}
+
+li:hover {
+  cursor: pointer;
+  background-color: #efefef;
+  text-shadow: 0 0 1px #aaa;
+}
+
+.items-content{
+  border-bottom: 1px solid #ccc;
+  height: 339px;
+  padding: 20px;
+}

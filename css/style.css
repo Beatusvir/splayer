@@ -1,0 +1,55 @@
+body{
+  width: 250px;
+  height: 250px;
+  margin: 0;
+  padding: 0;
+}
+.background img{
+  position: fixed;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  z-index: -1;
+}
+
+.button-mini {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: flex-end;
+  align-content: flex-end;
+}
+
+.button-mini img{
+  flex: 0 0 auto;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.button-bar {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: flex-end;
+  align-items: flex-end;
+}
+
+.button-bar img{
+  display: block;
+  flex: 0 0 auto;
+  margin-right: 5px;
+}
+
+.button-bar img:hover{
+  cursor: pointer;
+}
+
+button {
+  display: fixed;
+  bottom: 0;
+  right: 0;
+  margin-left: auto;
+  margin-top: auto;
+}

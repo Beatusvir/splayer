@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Settings</title>
+  <link rel="stylesheet" href="../css/settings.css">
+</head>
+
+<body>
+  <ul class="items">
+    <li id="library">Libray</li>
+    <li id="audio">Audio</li>
+  </ul>
+  <div class="items-content">
+    <div id="library-content">
+      <p>Library</p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam voluptatibus consectetur beatae at vitae quasi nostrum, repellat optio. Delectus, fugit exercitationem quos! Cupiditate numquam excepturi perspiciatis voluptate temporibus? Alias, iste.
+    </div>
+    <div id="audio-content" style="display: none;">
+      <p>Audio</p>
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem tenetur, quidem. Doloremque delectus, accusantium quos. Mollitia, similique, iusto. Est minima earum adipisci quam numquam sed. Officiis, placeat excepturi tenetur voluptates!
+    </div>
+  </div>
+  <div class="tools">
+    <button id="close-settings">Close</button>
+  </div>
+</body>
+
+<script>
+// You can also require other files to run in this process
+// require('../renderer.js')
+const ipcRenderer = require('electron').ipcRenderer
+
+var menu = document.querySelector('.items')
+menu.addEventListener('click', function(e){
+  console.log(e.target.id)
+  showContent(e.target.id)
+})
+
+showContent = function(id){
+  var items = document.getElementsByTagName('li')
+  for(var i = 0; i < items.length; i++){
+    document.querySelector('#' + items[i].id + '-content').style.display = 'none'
+  }
+  document.querySelector('#' + id + '-content').style.display = 'block'
+}
+
+let closeSettings = document.getElementById('close-settings')
+closeSettings.addEventListener('click', function () {
+  ipcRenderer.send('close-settings')
+})
+
+// let closeButton = document.getElementById('close-player')
+// closeButton.addEventListener('click', function () {
+//   ipcRenderer.send('close-player')
+// })
+
+</script>
+
+</html>

@@ -4,15 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <title>sPlayer</title>
-  <link rel="stylesheet" href="./css/mini.css">
+  <link rel="stylesheet" href="../css/mini.css">
 </head>
 
 <body>
   <div class="background">
-    <img src="./images/nocover.jpg" alt="Cover">
+    <img src="../images/nocover.jpg" alt="Cover">
   </div>
   <div class="tools">
-    <img src="./images/settings.png" class="clickable" alt="Settings" title="Settings">
     <button id="show-player">+</button>
     <button id="close-mini-player">x</button>
   </div>
@@ -24,25 +23,25 @@
     <h3 class="timer"><span class="current-time">01:32</span>&nbsp;/&nbsp;<span class="total-time">3:50</span></h3>
   </div>
   <div class="controls">
-    <img src="./images/previous.png" class="clickable" alt="Previous Song" title="Previous Song">
-    <img src="./images/play-pause.png" class="clickable" alt="Play / Pause" title="Play / Pause">
-    <img src="./images/stop.png" class="clickable" alt="Stop" title="Stop">
-    <img src="./images/next.png" class="clickable" alt="Next" title="Next">
+    <img src="../images/previous.png" class="clickable" alt="Previous Song" title="Previous Song">
+    <img src="../images/play-pause.png" class="clickable" alt="Play / Pause" title="Play / Pause">
+    <img src="../images/stop.png" class="clickable" alt="Stop" title="Stop">
+    <img src="../images/next.png" class="clickable" alt="Next" title="Next">
   </div>
 </body>
 
 <script>
   // You can also require other files to run in this process
-    require('./renderer.js')
+    require('../renderer.js')
     const ipcRenderer = require('electron').ipcRenderer
 
     let restorePlayerButton = document.getElementById('show-player')
-    miniPlayerButton.addEventListener('click', function () {
+    restorePlayerButton.addEventListener('click', function () {
       ipcRenderer.send('show-player')
     })
 
     let closeButton = document.getElementById('close-mini-player')
-    miniPlayerButton.addEventListener('click', function () {
+    closeButton.addEventListener('click', function () {
       ipcRenderer.send('close-player')
     })
 </script>

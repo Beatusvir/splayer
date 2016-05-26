@@ -1,4 +1,4 @@
-body{
+body {
   margin: 0;
   padding: 0;
   width: 250px;
@@ -7,13 +7,25 @@ body{
   flex-direction: column;
   align-content: center;
   align-items: center;
+  -webkit-app-region: drag;
+  font-family: sans-serif;
+}
+
+button {
+  -webkit-app-region: no-drag;
+}
+
+button:focus {
+  outline: none;
 }
 
 img.clickable {
+  -webkit-app-region: no-drag;
   opacity: 0.3;
   -webkit-transition: opacity 0.2s ease-in-out;
   -moz-transition: opacity 0.2s ease-in-out;
   transition: opacity 0.2s ease-in-out;
+  -o-transition: opacity 0.2s ease-in-out;
 }
 
 img.clickable:hover {
@@ -28,7 +40,8 @@ img.clickable:hover {
   padding: 0 2px 0 2px;
 }
 
-.tools img{
+.tools button:first-child{
+  font-size: 1.5em;
   margin-right: auto;
 }
 
@@ -72,11 +85,11 @@ img.clickable:hover {
   padding: 0 2px 0 2px;
 }
 
-.playing h1.song, .playing h3.artist-album, .playing h3.timer {
+.playing .song, .playing .artist-album, .playing .timer {
   margin: 0;
 }
 
-.playing h1.song{
+.playing .song{
   line-height: 1.1em;
   max-height: 1em;
   text-overflow: ellipsis;
@@ -85,18 +98,18 @@ img.clickable:hover {
   text-shadow: 1px 1px 2px #666;
 }
 
-.playing h3.artist-album{
+.playing .artist-album{
   color: #dfdfdf;
-  text-shadow: 0px 0px 1px #333;
+  text-shadow: 0 0 1px #333;
   line-height: 1.1em;
   max-height: 1em;
   text-overflow: ellipsis;
   overflow: hidden;
 }
 
-.playing h3.timer{
+.playing .timer{
   color: #dfdfdf;
-  text-shadow: 0px 0px 1px #333;
+  text-shadow: 0 0 1px #333;
   line-height: 1em;
   max-height: 1em;
   /* Compensate border */

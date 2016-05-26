@@ -6,11 +6,12 @@ const BrowserWindow = electron.BrowserWindow
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 let miniWindow
+let settingsWindow
 
 function createWindow() {
   mainWindow = new BrowserWindow({ width: 250, height: 250, frame: false })
   mainWindow.setMenu(null)
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
+  mainWindow.loadURL(`file://${__dirname}/views/index.html`)
 
   mainWindow.on('closed', function () {
     mainWindow = null
@@ -20,10 +21,20 @@ function createWindow() {
 function createMiniWindow() {
   miniWindow = new BrowserWindow({ width: 250, height: 75, frame: false })
   miniWindow.setMenu(null)
-  miniWindow.loadURL(`file://${__dirname}/index-mini.html`)
+  miniWindow.loadURL(`file://${__dirname}/views/index-mini.html`)
 
   miniWindow.on('closed', function () {
     miniWindow = null
+  })
+}
+
+function createSettingsWindow() {
+  settingsWindow = new BrowserWindow({ width: 500, height: 500, frame: false })
+  settingsWindow.setMenu(null)
+  settingsWindow.loadURL(`file://${__dirname}/views/settings.html`)
+
+  settingsWindow.on('closed', function () {
+    settingsWindow = null
   })
 }
 
@@ -55,15 +66,19 @@ app.on('activate', function () {
 // code. You can also put them in separate files and require them here.
 const ipcMain = electron.ipcMain
 ipcMain.on('close-player', function (event, args) {
-  console.log(event)
-  console.log(args)
-  //app.quit()
+  app.quit()
 })
 ipcMain.on('show-mini-player', function () {
-  createMiniWindow()
   mainWindow.hide()
+  createMiniWindow()
 })
 ipcMain.on('show-player', function () {
-  mainWindow.show()
   miniWindow.close()
+  mainWindow.show()
+})
+ipcMain.on('show-settings', function() {
+  createSettingsWindow()
+})
+ipcMain.on('close-settings', function() {
+  settingsWindow.close()
 })
