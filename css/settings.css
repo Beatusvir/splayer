@@ -46,7 +46,8 @@ ul {
 li {
   -webkit-app-region: no-drag;
   list-style: none;
-  padding: 20px;
+  padding: 20px 20px 15px 20px;
+  border-bottom: 5px solid transparent;
 }
 
 li:hover {

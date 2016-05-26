@@ -9,7 +9,7 @@
 
 <body>
   <ul class="items">
-    <li id="library">Libray</li>
+    <li id="library" style="border-bottom: 5px solid cyan;">Libray</li>
     <li id="audio">Audio</li>
   </ul>
   <div class="items-content">
@@ -42,8 +42,10 @@ showContent = function(id){
   var items = document.getElementsByTagName('li')
   for(var i = 0; i < items.length; i++){
     document.querySelector('#' + items[i].id + '-content').style.display = 'none'
+    document.querySelector('#' + items[i].id).style.borderBottom = 'none'
   }
   document.querySelector('#' + id + '-content').style.display = 'block'
+  document.querySelector('#' + id).style.borderBottom = '5px solid cyan'
 }
 
 let closeSettings = document.getElementById('close-settings')
