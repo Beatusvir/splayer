@@ -1,6 +1,7 @@
 const electron = require('electron')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
+const dialog = electron.dialog
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -9,19 +10,36 @@ let miniWindow
 let settingsWindow
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 250, height: 250, frame: false })
+  mainWindow = new BrowserWindow({
+    width: 250,
+    height: 250,
+    frame: false,
+    maximizable: false,
+    center: true
+  })
   mainWindow.setMenu(null)
-  mainWindow.loadURL(`file://${__dirname}/views/index.html`)
+  mainWindow.loadURL(`file://${__dirname}/views/player/player.html`)
 
   mainWindow.on('closed', function () {
     mainWindow = null
   })
+  mainWindow.on('move', function(){
+    // let x = mainWindow.getBounds().x
+    // let y = mainWindow.getBounds().y
+    // Save position
+  })
 }
 
 function createMiniWindow() {
-  miniWindow = new BrowserWindow({ width: 250, height: 75, frame: false })
+  miniWindow = new BrowserWindow({
+    width: 250,
+    height: 75,
+    frame: false,
+    maximizable: false,
+    center: true
+  })
   miniWindow.setMenu(null)
-  miniWindow.loadURL(`file://${__dirname}/views/index-mini.html`)
+  miniWindow.loadURL(`file://${__dirname}/views/mini-player/mini-player.html`)
 
   miniWindow.on('closed', function () {
     miniWindow = null
@@ -29,9 +47,15 @@ function createMiniWindow() {
 }
 
 function createSettingsWindow() {
-  settingsWindow = new BrowserWindow({ width: 500, height: 500, frame: false })
+  settingsWindow = new BrowserWindow({
+    width: 500,
+    height: 500,
+    frame: false,
+    maximizable: false,
+    center: true
+  })
   settingsWindow.setMenu(null)
-  settingsWindow.loadURL(`file://${__dirname}/views/settings.html`)
+  settingsWindow.loadURL(`file://${__dirname}/views/settings/settings.html`)
 
   settingsWindow.on('closed', function () {
     settingsWindow = null
@@ -77,8 +101,13 @@ ipcMain.on('show-player', function () {
   mainWindow.show()
 })
 ipcMain.on('show-settings', function() {
+  mainWindow.hide()
   createSettingsWindow()
 })
 ipcMain.on('close-settings', function() {
   settingsWindow.close()
+  mainWindow.show()
+})
+ipcMain.on('log', function(event, args){
+  console.log(args)
 })

@@ -12,17 +12,16 @@
   },
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial"
+    "music"
   ],
-  "author": "GitHub",
+  "author": "Ceps",
   "license": "CC0-1.0",
   "bugs": {
     "url": "https://github.com/electron/electron-quick-start/issues"
   },
   "homepage": "https://github.com/electron/electron-quick-start#readme",
   "devDependencies": {
-    "electron-prebuilt": "^1.0.1"
+    "electron-prebuilt": "^1.0.1",
+    "eslint-config-airbnb": "^9.0.1"
   }
 }

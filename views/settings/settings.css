@@ -1,0 +1,150 @@
+body {
+  width: 500px;
+  height: 500px;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  -webkit-app-region: drag;
+}
+
+.tools{
+  display: flex;
+  flex-direction: row;
+  width: 496px;
+  padding: 0 2px 0 2px;
+  height: 60px;
+}
+
+button {
+  -webkit-app-region: no-drag;
+  background-color: inherit;
+  border: none;
+}
+
+input[type="checkbox"] {
+  -webkit-app-region: no-drag;
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: #efefef;
+  text-shadow: 0 0 1px #aaa;
+}
+
+button:focus {
+  outline: none;
+}
+
+.tools button {
+  margin-left: auto;
+  width: 100px;
+}
+
+.items {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0;
+  border-bottom: 1px solid #eee;
+}
+
+li {
+  -webkit-app-region: no-drag;
+  list-style: none;
+  padding: 20px 20px 15px 20px;
+  border-bottom: 5px solid transparent;
+}
+
+li:hover {
+  cursor: pointer;
+  background-color: #efefef;
+  text-shadow: 0 0 1px #aaa;
+}
+
+.items-content{
+  border-bottom: 1px solid #eee;
+  padding: 20px;
+  font-size: 0.8em;
+  min-height: 339px;
+  /*overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-app-region: no-drag;*/
+}
+
+#library-content {
+  display: flex;
+  flex-direction: column;
+}
+
+#library-content article{
+  /*border-bottom: 1px solid #efefef;*/
+  padding-bottom: 20px;
+}
+
+.folders {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.folders-list {
+  margin: 0;
+  padding: 0;
+  border: 1px solid #aaa;
+  display: flex;
+  flex-direction: column;
+  width: 330px;
+  height: 180px;
+  overflow: hidden;
+  -webkit-app-region: no-drag;
+}
+
+.folders-list li{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 5px;
+  margin: 1px;
+  line-height: 2em;
+  height: 2em;
+}
+
+.selected {
+  background-color: #efefef;
+}
+
+.folders-buttons{
+  display: flex;
+  flex-direction: column;
+}
+
+.folders-buttons button{
+  padding: 10px;
+  background-color: #efefef;
+  margin-bottom: 10px;
+}
+
+.folders-buttons button:first-child:hover{
+  background-color: cyan;
+}
+
+.folders-buttons button:last-child:hover{
+  background-color: maroon;
+  text-shadow: none;
+  color: white;
+}
+
+#library-options {
+  display: flex;
+  flex-direction: column;
+}
+
+#library-options button {
+  margin-top: 10px;
+  padding: 5px;
+  width: 150px;
+  background-color: #efefef;
+}
+
+#library-options button:hover {
+  background-color: cyan;
+}
