@@ -63,12 +63,9 @@ li:hover {
 
 .items-content{
   border-bottom: 1px solid #eee;
-  padding: 20px;
+  padding: 20px 20px 0 20px;
   font-size: 0.8em;
-  min-height: 339px;
-  /*overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-app-region: no-drag;*/
+  min-height: 359px;
 }
 
 #library-content {
@@ -93,7 +90,7 @@ li:hover {
   border: 1px solid #aaa;
   display: flex;
   flex-direction: column;
-  width: 330px;
+  width: 350px;
   height: 180px;
   overflow: hidden;
   -webkit-app-region: no-drag;
@@ -131,6 +128,12 @@ li:hover {
   background-color: maroon;
   text-shadow: none;
   color: white;
+}
+
+#total-songs {
+  color: #aaa;
+  width: 350px;
+  text-align: right;
 }
 
 #library-options {

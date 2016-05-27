@@ -2,6 +2,12 @@
 const ipcRenderer = require('electron').ipcRenderer
 // If using in renderer process
 const {dialog} = require('electron').remote
+const fs = require('fs')
+
+const extensions = ['MP3','FLAC']
+
+let totalFiles = 0
+let songs = []
 
 let menu = document.querySelector('.items')
 menu.addEventListener('click', function(e){
@@ -9,13 +15,15 @@ menu.addEventListener('click', function(e){
 })
 
 showContent = function(id){
-  let items = document.getElementsByTagName('li')
+  let items = document.querySelectorAll('.items li')
   for(let i = 0; i < items.length; i++){
     document.querySelector('#' + items[i].id + '-content').style.display = 'none'
-    document.querySelector('#' + items[i].id).style.borderBottom = 'none'
+    document.querySelector('#' + items[i].id).style.borderBottom = '5px solid transparent'
+    document.querySelector('#' + items[i].id).style.transition = 'all 0.5s ease'
   }
   document.querySelector('#' + id + '-content').style.display = 'block'
   document.querySelector('#' + id).style.borderBottom = '5px solid cyan'
+  document.querySelector('#' + id).style.transition = 'all 0.5s ease'
 }
 
 let closeSettings = document.getElementById('close-settings')
@@ -29,6 +37,7 @@ buttonAdd.addEventListener('click', function() {
     properties: ['openFile', 'openDirectory', 'multiSelections']
   }, function(result){
     addFolders(result)
+
   })
 })
 
@@ -41,6 +50,37 @@ function addFolders(folders){
     newItem.setAttribute('title', folders[i])
     folderList.appendChild(newItem)
   }
+  updateSongs(folders)
+}
+
+function updateSongs(folders){
+  for(let i = 0; i < folders.length; i++){
+    processFolder(folders[i])
+  }
+}
+
+function processFolder(folder){
+  var files = fs.readdir(folder, function(err, files){
+    for(var index in files){
+      try{
+        var currentFile = folder + '\\' + files[index]
+        if (fs.lstatSync(currentFile).isDirectory()) {
+          processFolder(currentFile)
+        }else{
+          if (extensions.indexOf(getExtension(currentFile).toUpperCase()) >= 0){
+            songs.push(currentFile)
+          }
+        }
+      }catch(err){
+        ipcRenderer.send('log', err.message)
+      }
+    }
+    document.getElementById('total-songs').innerHTML = 'Total songs (' + songs.length + ')'
+  })
+}
+
+function getExtension(file){
+  return file.substr(file.lastIndexOf('.') + 1).trim()
 }
 
 document.querySelector('.folders-list').addEventListener('click', function(e){
