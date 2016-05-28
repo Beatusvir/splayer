@@ -11,15 +11,11 @@ body {
   font-family: sans-serif;
 }
 
-button {
+i {
   -webkit-app-region: no-drag;
 }
 
-button:focus {
-  outline: none;
-}
-
-img.clickable {
+i.clickable {
   -webkit-app-region: no-drag;
   opacity: 0.3;
   -webkit-transition: opacity 0.2s ease-in-out;
@@ -28,7 +24,7 @@ img.clickable {
   -o-transition: opacity 0.2s ease-in-out;
 }
 
-img.clickable:hover {
+i.clickable:hover {
   cursor: pointer;
   opacity: 0.75;
 }
@@ -40,22 +36,19 @@ img.clickable:hover {
   padding: 0 2px 0 2px;
 }
 
-.tools button:first-child{
-  font-size: 1.5em;
+.tools i:first-child{
   margin-right: auto;
 }
 
-.tools button{
+.tools i{
   opacity: 0.75;
-  font-size: 0.9em;
   cursor: pointer;
-  font-weight: bold;
   color: #c9c9c9;
   border: none;
   background-color: transparent;
 }
 
-.tools button:last-child{
+.tools i:last-child{
   margin-left: 5px;
 }
 

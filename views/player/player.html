@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title>sPlayer</title>
   <link rel="stylesheet" href="./player.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -12,9 +13,9 @@
     <img src="../../images/nocover.jpg" alt="Cover">
   </div>
   <div class="tools">
-    <button id="show-settings">*</button>
-    <button id="show-mini-player">-</button>
-    <button id="close-player">x</button>
+    <i id="show-settings" class="fa fa-cog clickable" aria-hidden="true" alt="Show Settings" title="Show Settings"></i>
+    <i id="show-mini-player" class="fa fa-chevron-down clickable" aria-hidden="true" alt="Show Mini-Player" title="Show Mini-Player"></i>
+    <i id="close-player" class="fa fa-times clickable" aria-hidden="true" alt="Close Player" title="Close Player"></i>
   </div>
   <div class="playing">
     <div class="track-info">
@@ -24,10 +25,10 @@
     <h3 class="timer"><span class="current-time">01:32</span>&nbsp;/&nbsp;<span class="total-time">3:50</span></h3>
   </div>
   <div class="controls">
-    <img src="../../images/previous.png" class="clickable" alt="Previous Song" title="Previous Song">
-    <img src="../../images/play-pause.png" class="clickable" alt="Play / Pause" title="Play / Pause">
-    <img src="../../images/stop.png" class="clickable" alt="Stop" title="Stop">
-    <img src="../../images/next.png" class="clickable" alt="Next" title="Next">
+    <i class="fa fa-backward clickable" aria-hidden="true" alt="Previous Song" title="Previous Song"></i>
+    <i class="fa fa-play clickable" aria-hidden="true" alt="Play / Pause" title="Play / Pause"></i>
+    <i class="fa fa-stop clickable" aria-hidden="true" alt="Stop" title="Stop"></i>
+    <i class="fa fa-forward clickable" aria-hidden="true" alt="Next Song" title="Next Song"></i>
   </div>
   <script src="./player.js"></script>
 </body>

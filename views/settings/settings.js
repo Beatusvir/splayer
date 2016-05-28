@@ -4,19 +4,19 @@ const ipcRenderer = require('electron').ipcRenderer
 const {dialog} = require('electron').remote
 const fs = require('fs')
 
-const extensions = ['MP3','FLAC']
+const extensions = ['MP3', 'FLAC']
 
 let totalFiles = 0
 let songs = []
 
 let menu = document.querySelector('.items')
-menu.addEventListener('click', function(e){
+menu.addEventListener('click', function(e) {
   showContent(e.target.id)
 })
 
-showContent = function(id){
+showContent = function(id) {
   let items = document.querySelectorAll('.items li')
-  for(let i = 0; i < items.length; i++){
+  for (let i = 0; i < items.length; i++) {
     document.querySelector('#' + items[i].id + '-content').style.display = 'none'
     document.querySelector('#' + items[i].id).style.borderBottom = '5px solid transparent'
     document.querySelector('#' + items[i].id).style.transition = 'all 0.5s ease'
@@ -27,7 +27,7 @@ showContent = function(id){
 }
 
 let closeSettings = document.getElementById('close-settings')
-closeSettings.addEventListener('click', function () {
+closeSettings.addEventListener('click', function() {
   ipcRenderer.send('close-settings')
 })
 
@@ -35,15 +35,15 @@ let buttonAdd = document.getElementById('buttonAdd')
 buttonAdd.addEventListener('click', function() {
   dialog.showOpenDialog({
     properties: ['openFile', 'openDirectory', 'multiSelections']
-  }, function(result){
+  }, function(result) {
     addFolders(result)
 
   })
 })
 
-function addFolders(folders){
+function addFolders(folders) {
   var folderList = document.querySelector('.folders-list')
-  for(let i = 0; i < folders.length; i++){
+  for (let i = 0; i < folders.length; i++) {
     let newItem = document.createElement('li')
     newItem.innerHTML = folders[i]
     newItem.id = 'folder-' + i
@@ -53,56 +53,63 @@ function addFolders(folders){
   updateSongs(folders)
 }
 
-function updateSongs(folders){
-  for(let i = 0; i < folders.length; i++){
+function updateSongs(folders) {
+  for (let i = 0; i < folders.length; i++) {
     processFolder(folders[i])
   }
 }
 
-function processFolder(folder){
-  var files = fs.readdir(folder, function(err, files){
-    for(var index in files){
-      try{
-        var currentFile = folder + '\\' + files[index]
+function processFolder(folder) {
+  var folderSeparator = ''
+  if (folder.indexOf('/') >= 0) {
+    folderSeparator = '/'
+  } else {
+    folderSeparator = '\\'
+  }
+  var files = fs.readdir(folder, function(err, files) {
+    for (var index in files) {
+      try {
+        var currentFile = folder + folderSeparator + files[index]
         if (fs.lstatSync(currentFile).isDirectory()) {
           processFolder(currentFile)
-        }else{
-          if (extensions.indexOf(getExtension(currentFile).toUpperCase()) >= 0){
+        } else {
+          if (extensions.indexOf(getExtension(currentFile).toUpperCase()) >= 0) {
             songs.push(currentFile)
           }
         }
-      }catch(err){
+      } catch (err) {
         ipcRenderer.send('log', err.message)
       }
     }
     document.getElementById('total-songs').innerHTML = 'Total songs (' + songs.length + ')'
   })
+  document.getElementById('total-songs').innerHTML = 'Total songs (' + songs.length + ')'
 }
 
-function getExtension(file){
+function getExtension(file) {
   return file.substr(file.lastIndexOf('.') + 1).trim()
 }
 
-document.querySelector('.folders-list').addEventListener('click', function(e){
-  if (e.target && e.target.nodeName === 'LI'){
+document.querySelector('.folders-list').addEventListener('click', function(e) {
+  if (e.target && e.target.nodeName === 'LI') {
     toggleSelected(e.target.id)
   }
 })
 
-function toggleSelected(element){
+function toggleSelected(element) {
   var currentItem = document.getElementById(element)
-  if(currentItem.className == 'selected'){
+  if (currentItem.className == 'selected') {
     currentItem.className = ''
-  }else{
+  } else {
     currentItem.className = 'selected'
   }
 }
 
 let removeButton = document.getElementById('buttonRemove')
-removeButton.addEventListener('click', function(){
+removeButton.addEventListener('click', function() {
   var items = document.querySelectorAll('.folders-list li.selected')
-  for(let i = items.length - 1; i >= 0; i--){
-    if (items[i].className == 'selected'){
+  for (let i = items.length - 1; i >= 0; i--) {
+    if (items[i].className == 'selected') {
       document.querySelector('.folders-list').removeChild(items[i])
     }
   }
