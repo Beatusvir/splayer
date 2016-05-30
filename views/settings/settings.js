@@ -33,13 +33,16 @@ closeSettings.addEventListener('click', function() {
 
 let buttonAdd = document.getElementById('buttonAdd')
 buttonAdd.addEventListener('click', function() {
+    showFileDialog()
+})
+
+function showFileDialog(){
   dialog.showOpenDialog({
     properties: ['openFile', 'openDirectory', 'multiSelections']
   }, function(result) {
     addFolders(result)
-
   })
-})
+}
 
 function addFolders(folders) {
   var folderList = document.querySelector('.folders-list')
