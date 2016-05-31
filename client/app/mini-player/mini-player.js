@@ -1,4 +1,4 @@
-require('../../renderer.js')
+//require('../../renderer.js')
 const ipcRenderer = require('electron').ipcRenderer
 
 let restorePlayerButton = document.getElementById('show-player')

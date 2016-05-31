@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>sPlayer</title>
+  <link rel="stylesheet" href="./player.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="app.css">
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body ng-app="sPlayer" ng-controller="PlayerController">
+  <div class="background">
+    <img src="../images/nocover.jpg" alt="Cover">
+  </div>
+  <div class="tools">
+    <i id="show-settings" class="fa fa-cog clickable" ng-click="showSettings()" aria-hidden="true" alt="Show Settings" title="Show Settings"></i>
+    <i id="show-mini-player" class="fa fa-chevron-down clickable" ng-click="showMiniPlayer()" aria-hidden="true" alt="Show Mini-Player" title="Show Mini-Player"></i>
+    <i id="close-player" class="fa fa-times clickable" ng-click="closePlayer()" aria-hidden="true" alt="Close Player" title="Close Player"></i>
+  </div>
+  <div class="playing">
+    <div class="track-info">
+      <h1 class="song">Blackened</h1>
+      <h3 class="artist-album">Metallica / Black Album</h3>
+    </div>
+    <h3 class="timer"><span class="current-time">01:32</span>&nbsp;/&nbsp;<span class="total-time">3:50</span></h3>
+  </div>
+  <div class="controls">
+    <i class="fa fa-backward clickable" aria-hidden="true" alt="Previous Song" title="Previous Song"></i>
+    <i class="fa fa-play clickable" aria-hidden="true" alt="Play / Pause" title="Play / Pause"></i>
+    <i class="fa fa-stop clickable" aria-hidden="true" alt="Stop" title="Stop"></i>
+    <i class="fa fa-forward clickable" aria-hidden="true" alt="Next Song" title="Next Song"></i>
+  </div>
+  <script src="../bower_components/angular/angular.js"></script>
+  <script src="../bower_components/angular-route/angular-route.js"></script>
+  <script src="../app.js"></script>
+  <script src="../components/version/version.js"></script>
+  <script src="../components/version/version-directive.js"></script>
+  <script src="../components/version/interpolate-filter.js"></script>
+  <script src="./player.js"></script>
+</body>
+
+</html>

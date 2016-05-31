@@ -1,4 +1,5 @@
 const electron = require('electron')
+require('electron-debug')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const dialog = electron.dialog
@@ -18,7 +19,8 @@ function createWindow() {
     center: true
   })
   mainWindow.setMenu(null)
-  mainWindow.loadURL(`file://${__dirname}/views/player/player.html`)
+  mainWindow.loadURL(`file://${__dirname}/client/app/player/player.html`)
+  mainWindow.openDevTools({ detach: true })
 
   mainWindow.on('closed', function () {
     mainWindow = null
@@ -39,7 +41,7 @@ function createMiniWindow() {
     center: true
   })
   miniWindow.setMenu(null)
-  miniWindow.loadURL(`file://${__dirname}/views/mini-player/mini-player.html`)
+  miniWindow.loadURL(`file://${__dirname}/client/app/mini-player/mini-player.html`)
 
   miniWindow.on('closed', function () {
     miniWindow = null
@@ -55,7 +57,7 @@ function createSettingsWindow() {
     center: true
   })
   settingsWindow.setMenu(null)
-  settingsWindow.loadURL(`file://${__dirname}/views/settings/settings.html`)
+  settingsWindow.loadURL(`file://${__dirname}/client/app/settings/settings.html`)
 
   settingsWindow.on('closed', function () {
     settingsWindow = null

@@ -37,5 +37,8 @@
     "karma-jasmine": "^1.0.2",
     "karma-requirejs": "^1.0.0",
     "requirejs": "^2.2.0"
+  },
+  "dependencies": {
+    "electron-debug": "^1.0.0"
   }
 }
