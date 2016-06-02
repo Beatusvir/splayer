@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>sPlayer</title>
+  <link rel="stylesheet" href="./player.css">
+  <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="../bower_components/html5-boilerplate/dist/css/main.css">
+  <script src="../bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+
+<body ng-app="sPlayer" ng-controller="PlayerController">
+  <div class="background">
+    <img src="../images/nocover.jpg" alt="Cover">
+  </div>
+
+  <tool-bar></tool-bar>
+  <playing></playing>
+  <play-controls view="normal"></play-controls>
+
+  <script src="../bower_components/angular/angular.js"></script>
+  <script src="../bower_components/angular-route/angular-route.js"></script>
+  <script src="../app.js"></script>
+
+  <script src="../components/version/version.js"></script>
+  <script src="../components/version/version-directive.js"></script>
+  <script src="../components/version/interpolate-filter.js"></script>
+  <script src="../components/playControls/play-controls.component.js"></script>
+  <script src="../components/toolBar/tool-bar.component.js"></script>
+  <script src="../components/playing/playing.component.js"></script>
+
+  <script src="./player.js"></script>
+</body>
+
+</html>

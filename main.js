@@ -19,13 +19,13 @@ function createWindow() {
     center: true
   })
   mainWindow.setMenu(null)
-  mainWindow.loadURL(`file://${__dirname}/client/app/player/player.html`)
-  mainWindow.openDevTools({ detach: true })
+  mainWindow.loadURL(`file://${__dirname}/client/app/viewPlayer/player.html`)
+  //mainWindow.openDevTools({ detach: true })
 
   mainWindow.on('closed', function () {
     mainWindow = null
   })
-  mainWindow.on('move', function(){
+  mainWindow.on('move', function () {
     // let x = mainWindow.getBounds().x
     // let y = mainWindow.getBounds().y
     // Save position
@@ -41,7 +41,8 @@ function createMiniWindow() {
     center: true
   })
   miniWindow.setMenu(null)
-  miniWindow.loadURL(`file://${__dirname}/client/app/mini-player/mini-player.html`)
+  miniWindow.loadURL(`file://${__dirname}/client/app/viewMiniPlayer/mini-player.html`)
+  //miniWindow.openDevTools({ detach: true })
 
   miniWindow.on('closed', function () {
     miniWindow = null
@@ -57,7 +58,8 @@ function createSettingsWindow() {
     center: true
   })
   settingsWindow.setMenu(null)
-  settingsWindow.loadURL(`file://${__dirname}/client/app/settings/settings.html`)
+  settingsWindow.loadURL(`file://${__dirname}/client/app/viewSettings/settings.html`)
+  settingsWindow.openDevTools({ detach: true })
 
   settingsWindow.on('closed', function () {
     settingsWindow = null
@@ -94,22 +96,36 @@ const ipcMain = electron.ipcMain
 ipcMain.on('close-player', function (event, args) {
   app.quit()
 })
-ipcMain.on('show-mini-player', function () {
-  mainWindow.hide()
-  createMiniWindow()
+ipcMain.on('toggle-player', function () {
+  var currentWindow = BrowserWindow.getFocusedWindow()
+  if (currentWindow === mainWindow) {
+    mainWindow.hide()
+    createMiniWindow()
+  } else if (currentWindow === miniWindow) {
+    miniWindow.close()
+    mainWindow.show()
+  }
 })
-ipcMain.on('show-player', function () {
-  miniWindow.close()
-  mainWindow.show()
-})
-ipcMain.on('show-settings', function() {
+ipcMain.on('show-settings', function () {
   mainWindow.hide()
   createSettingsWindow()
 })
-ipcMain.on('close-settings', function() {
+ipcMain.on('close-settings', function () {
   settingsWindow.close()
   mainWindow.show()
 })
-ipcMain.on('log', function(event, args){
+ipcMain.on('log', function (event, args) {
   console.log(args)
+})
+ipcMain.on('play-pause', function(){
+
+})
+ipcMain.on('previous', function(){
+
+})
+ipcMain.on('next', function(){
+
+})
+ipcMain.on('stop', function(){
+
 })

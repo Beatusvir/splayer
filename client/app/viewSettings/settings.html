@@ -7,9 +7,9 @@
   <link rel="stylesheet" href="./settings.css">
 </head>
 
-<body>
-  <ul class="items">
-    <li id="library" style="border-bottom: 5px solid cyan;">Libray</li>
+<body ng-app="sPlayer" ng-controller="SettingsController">
+  <ul class="items" ng-click="showContent($event)">
+    <li id="library" class="item-selected">Library</li>
     <li id="playlist">Playlist</li>
     <li id="audio">Audio</li>
   </ul>
@@ -21,13 +21,13 @@
           <ul class="folders-list">
           </ul>
           <div class="folders-buttons">
-            <button id="buttonAdd">Add</button>
-            <button id="buttonRemove">Remove</button>
+            <button id="buttonAdd" ng-click="showFileDialog()">Add</button>
+            <button id="buttonRemove" ng-click="removeFolder()">Remove</button>
           </div>
         </div>
       </article>
       <article id="total-songs">
-          Total songs (0)
+          Total songs ({{ songs.length }})
       </article>
       <article id="library-options">
         <div>
@@ -55,7 +55,7 @@
     </div>
   </div>
   <div class="tools">
-    <button id="close-settings">Close</button>
+    <button ng-click="closeSettings()">Close</button>
   </div>
   <script src="../bower_components/angular/angular.js"></script>
   <script src="../bower_components/angular-route/angular-route.js"></script>

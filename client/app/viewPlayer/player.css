@@ -11,6 +11,22 @@ body {
   font-family: sans-serif;
 }
 
+playing {
+  margin-top: auto;
+}
+
+.playing {
+  width: 246px;
+  display: flex;
+  flex-direction: row;
+  font-family: Arial;
+  margin-top: auto;
+  font-size: 0.8em;
+  overflow: hidden;
+  align-items: flex-end;
+  padding: 0 2px 0 2px;
+}
+
 i {
   -webkit-app-region: no-drag;
 }
@@ -29,29 +45,6 @@ i.clickable:hover {
   opacity: 0.75;
 }
 
-.tools{
-  width: 246px;
-  display: flex;
-  flex-direction: row;
-  padding: 0 2px 0 2px;
-}
-
-.tools i:first-child{
-  margin-right: auto;
-}
-
-.tools i{
-  opacity: 0.75;
-  cursor: pointer;
-  color: #c9c9c9;
-  border: none;
-  background-color: transparent;
-}
-
-.tools i:last-child{
-  margin-left: 5px;
-}
-
 .background {
   position: fixed;
   z-index: -1;
@@ -64,18 +57,6 @@ i.clickable:hover {
 .background img{
   height: 100%;
   width: 100%;
-}
-
-.playing {
-  width: 246px;
-  display: flex;
-  flex-direction: row;
-  font-family: Arial;
-  margin-top: auto;
-  font-size: 0.8em;
-  overflow: hidden;
-  align-items: flex-end;
-  padding: 0 2px 0 2px;
 }
 
 .playing .song, .playing .artist-album, .playing .timer {
@@ -110,9 +91,9 @@ i.clickable:hover {
 }
 
 .controls{
+  width: 250px;
+  margin-top: 10px;
   display: flex;
   flex-direction: row;
-  width: 100%;
   justify-content: space-around;
-  margin-top: 10px;
 }

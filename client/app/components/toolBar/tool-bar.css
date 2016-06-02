@@ -1,0 +1,22 @@
+.tools{
+  width: 246px;
+  display: flex;
+  flex-direction: row;
+  padding: 0 2px 0 2px;
+}
+
+.tools i:first-child{
+  margin-right: auto;
+}
+
+.tools i{
+  opacity: 0.75;
+  cursor: pointer;
+  color: #c9c9c9;
+  border: none;
+  background-color: transparent;
+}
+
+.tools i:last-child{
+  margin-left: 5px;
+}

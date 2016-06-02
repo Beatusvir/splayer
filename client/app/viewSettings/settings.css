@@ -48,6 +48,16 @@ button:focus {
   border-bottom: 1px solid #eee;
 }
 
+.items li{
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.item-selected {
+  border-bottom: 5px solid cyan;
+}
+
 li {
   -webkit-app-region: no-drag;
   list-style: none;

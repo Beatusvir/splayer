@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>sPlayer</title>
+  <link rel="stylesheet" href="mini-player.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+</head>
+
+<body ng-app="sPlayer" ng-controller="MiniPlayerController">
+  <div class="background">
+    <img src="../images/nocover.jpg" alt="Cover">
+  </div>
+
+  <tool-bar></tool-bar>
+  <playing></playing>
+  <play-controls view="mini"></play-controls>
+
+  <script src="../bower_components/angular/angular.js"></script>
+  <script src="../bower_components/angular-route/angular-route.js"></script>
+  <script src="../app.js"></script>
+  <script src="../components/version/version.js"></script>
+  <script src="../components/version/version-directive.js"></script>
+  <script src="../components/version/interpolate-filter.js"></script>
+
+    <script src="../components/playControls/play-controls.component.js"></script>
+  <script src="../components/toolBar/tool-bar.component.js"></script>
+  <script src="../components/playing/playing.component.js"></script>
+
+  <script src="./mini-player.js"></script>
+</body>
+
+</html>
