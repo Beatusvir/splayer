@@ -1,5 +1,4 @@
 //require('../../renderer.js')
-app.controller('PlayerController', ['$scope', function ($scope) {
-
+app.controller('PlayerController', ['$rootScope','$scope', 'AppService', 'SettingsService', function ($rootScope, $scope, AppService, SettingsService) {
 
 }])

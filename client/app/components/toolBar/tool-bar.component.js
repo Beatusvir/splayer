@@ -1,19 +1,18 @@
 'use strict'
-const ipcRenderer = require('electron').ipcRenderer
 
-function ToolBarController() {
+function ToolBarController(AppService) {
   var ctrl = this
 
   ctrl.togglePlayer = function () {
-    ipcRenderer.send('toggle-player')
+    AppService.togglePlayer()
   }
 
   ctrl.showSettings = function () {
-    ipcRenderer.send('show-settings')
+    AppService.showSettings()
   }
 
   ctrl.closePlayer = function () {
-    ipcRenderer.send('close-player')
+    AppService.closePlayer()
   }
 }
 

@@ -1,12 +1,11 @@
 'strict mode'
-const ipcRenderer = require('electron').ipcRenderer
 const {dialog} = require('electron').remote
 const fs = require('fs')
 
-app.controller('SettingsController', ['$scope', function ($scope) {
+app.controller('SettingsController', ['$scope', 'AppService', 'SettingsService', function ($scope, AppService, SettingsService) {
   $scope.extensions = ['MP3', 'FLAC']
   $scope.totalFiles = 0
-  $scope.songs = []
+  $scope.songs = SettingsService.getSongs()
 
   $scope.showContent = function (element) {
     let id = element.target.id
@@ -20,7 +19,7 @@ app.controller('SettingsController', ['$scope', function ($scope) {
   }
 
   $scope.closeSettings = function () {
-    ipcRenderer.send('close-settings')
+    AppService.closeSettings()
   }
 
   $scope.showFileDialog = function () {
@@ -45,6 +44,7 @@ app.controller('SettingsController', ['$scope', function ($scope) {
       }
       var itemsLeft = document.querySelectorAll('.folders-list li')
       $scope.songs = []
+      SettingsService.setSongs($scope.songs)
 
       for (let i = 0; i < itemsLeft.length; i++) {
         var currentItem = document.getElementById(itemsLeft[i].id)
@@ -103,9 +103,10 @@ app.controller('SettingsController', ['$scope', function ($scope) {
           }
           $scope.$apply()
         } catch (err) {
-          ipcRenderer.send('log', err.message)
+          AppService.log(err.message)
         }
       }
+      SettingsService.setSongs($scope.songs)
     })
   }
 

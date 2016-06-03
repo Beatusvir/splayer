@@ -3,12 +3,19 @@ require('electron-debug')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const dialog = electron.dialog
+const AV = require('av')
+require('flac.js')
+require('mp3')
+const fs = require('fs')
+
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 let miniWindow
 let settingsWindow
+
+global.songs = []
 
 function createWindow() {
   mainWindow = new BrowserWindow({
@@ -59,7 +66,7 @@ function createSettingsWindow() {
   })
   settingsWindow.setMenu(null)
   settingsWindow.loadURL(`file://${__dirname}/client/app/viewSettings/settings.html`)
-  settingsWindow.openDevTools({ detach: true })
+  //settingsWindow.openDevTools({ detach: true })
 
   settingsWindow.on('closed', function () {
     settingsWindow = null
@@ -111,21 +118,33 @@ ipcMain.on('show-settings', function () {
   createSettingsWindow()
 })
 ipcMain.on('close-settings', function () {
-  settingsWindow.close()
   mainWindow.show()
+  settingsWindow.close()
+})
+ipcMain.on('set-songs', function (event, songs) {
+  global.songs = songs
 })
 ipcMain.on('log', function (event, args) {
   console.log(args)
 })
-ipcMain.on('play-pause', function(){
+ipcMain.on('play-pause', function (event, songs) {
+  try {
+    console.log('trying to play song: ' + global.songs[0])
+    var file = fs.readFileSync(songs[0])
+    //console.log('File read: ')
+    console.log(file)
+    // var player = AV.Player.fromFile(file)
+    // player.togglePlayback()
+  } catch (err) {
+    console.log(err)
+  }
+})
+ipcMain.on('previous', function () {
 
 })
-ipcMain.on('previous', function(){
+ipcMain.on('next', function () {
 
 })
-ipcMain.on('next', function(){
-
-})
-ipcMain.on('stop', function(){
+ipcMain.on('stop', function () {
 
 })

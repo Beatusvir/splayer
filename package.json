@@ -27,7 +27,7 @@
     }
   },
   "devDependencies": {
-    "electron-prebuilt": "^1.0.1",
+    "electron-prebuilt": "^1.2.1",
     "eslint": "^2.11.0",
     "jasmine": "^2.4.1",
     "jasmine-core": "^2.4.1",
@@ -39,6 +39,10 @@
     "requirejs": "^2.2.0"
   },
   "dependencies": {
-    "electron-debug": "^1.0.0"
+    "av": "^0.4.8",
+    "electron-debug": "^1.0.0",
+    "file-api": "^0.10.4",
+    "flac.js": "^0.2.1",
+    "mp3": "^0.1.0"
   }
 }
