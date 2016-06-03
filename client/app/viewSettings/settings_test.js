@@ -1,4 +1,3 @@
-// const settings = require('settings.js')
 describe('Calculator', function() {
 
   beforeEach(module('sPlayer'))
