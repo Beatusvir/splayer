@@ -8,7 +8,6 @@ require('flac.js')
 require('mp3')
 const fs = require('fs')
 
-
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
@@ -16,8 +15,9 @@ let miniWindow
 let settingsWindow
 
 global.songs = []
+global.folders = []
 
-function createWindow() {
+function createWindow () {
   mainWindow = new BrowserWindow({
     width: 250,
     height: 250,
@@ -27,7 +27,7 @@ function createWindow() {
   })
   mainWindow.setMenu(null)
   mainWindow.loadURL(`file://${__dirname}/client/app/viewPlayer/player.html`)
-  //mainWindow.openDevTools({ detach: true })
+  mainWindow.openDevTools({ detach: true })
 
   mainWindow.on('closed', function () {
     mainWindow = null
@@ -39,7 +39,7 @@ function createWindow() {
   })
 }
 
-function createMiniWindow() {
+function createMiniWindow () {
   miniWindow = new BrowserWindow({
     width: 250,
     height: 75,
@@ -49,14 +49,14 @@ function createMiniWindow() {
   })
   miniWindow.setMenu(null)
   miniWindow.loadURL(`file://${__dirname}/client/app/viewMiniPlayer/mini-player.html`)
-  //miniWindow.openDevTools({ detach: true })
+  miniWindow.openDevTools({ detach: true })
 
   miniWindow.on('closed', function () {
     miniWindow = null
   })
 }
 
-function createSettingsWindow() {
+function createSettingsWindow () {
   settingsWindow = new BrowserWindow({
     width: 500,
     height: 500,
@@ -66,7 +66,7 @@ function createSettingsWindow() {
   })
   settingsWindow.setMenu(null)
   settingsWindow.loadURL(`file://${__dirname}/client/app/viewSettings/settings.html`)
-  //settingsWindow.openDevTools({ detach: true })
+  settingsWindow.openDevTools({ detach: true })
 
   settingsWindow.on('closed', function () {
     settingsWindow = null
@@ -127,24 +127,28 @@ ipcMain.on('set-songs', function (event, songs) {
 ipcMain.on('log', function (event, args) {
   console.log(args)
 })
+
+ipcMain.on('show-file-dialog', (event, arg) => {
+  dialog.showOpenDialog({
+    properties: ['openFile', 'openDirectory', 'multiSelections']
+  }, function (result) {
+    global.folders = result
+    event.sender.send('show-file-dialog-callback', result)
+  })
+})
+
 ipcMain.on('play-pause', function (event, songs) {
   try {
     console.log('trying to play song: ' + global.songs[0])
     var file = fs.readFileSync(songs[0])
-    //console.log('File read: ')
+    // console.log('File read: ')
     console.log(file)
-    // var player = AV.Player.fromFile(file)
-    // player.togglePlayback()
+  // var player = AV.Player.fromFile(file)
+  // player.togglePlayback()
   } catch (err) {
     console.log(err)
   }
 })
-ipcMain.on('previous', function () {
-
-})
-ipcMain.on('next', function () {
-
-})
-ipcMain.on('stop', function () {
-
-})
+ipcMain.on('previous', function () {})
+ipcMain.on('next', function () {})
+ipcMain.on('stop', function () {})

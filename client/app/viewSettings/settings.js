@@ -1,8 +1,7 @@
 'strict mode'
-const {dialog} = require('electron').remote
 const fs = require('fs')
 
-app.controller('SettingsController', ['$scope', 'AppService', 'SettingsService', function ($scope, AppService, SettingsService) {
+app.controller('SettingsController', ['$rootScope','$scope', 'AppService', 'SettingsService', function ($rootScope, $scope, AppService, SettingsService) {
   $scope.extensions = ['MP3', 'FLAC']
   $scope.totalFiles = 0
   $scope.songs = SettingsService.getSongs()
@@ -18,17 +17,19 @@ app.controller('SettingsController', ['$scope', 'AppService', 'SettingsService',
     document.querySelector('#' + id).style.borderBottom = '5px solid cyan'
   }
 
+  $rootScope.$on('folders-changed', (event, folders) => {
+    addFolders(folders)
+  })
+
   $scope.closeSettings = function () {
     AppService.closeSettings()
   }
 
   $scope.showFileDialog = function () {
-    dialog.showOpenDialog({
-      properties: ['openFile', 'openDirectory', 'multiSelections']
-    }, function (result) {
-      addFolders(result)
-    })
+    AppService.showFileDialog()
   }
+
+
 
   $scope.removeFolder = function () {
     var items = document.querySelectorAll('.folders-list li.selected')
@@ -53,7 +54,7 @@ app.controller('SettingsController', ['$scope', 'AppService', 'SettingsService',
     }
   }
 
-  function toggleSelected(id) {
+  function toggleSelected (id) {
     var currentItem = document.getElementById(id)
     if (currentItem.className == 'selected') {
       currentItem.className = ''
@@ -62,7 +63,7 @@ app.controller('SettingsController', ['$scope', 'AppService', 'SettingsService',
     }
   }
 
-  function addFolders(folders) {
+  function addFolders (folders) {
     var folderList = document.querySelector('.folders-list')
     for (let i = 0; i < folders.length; i++) {
       let newItem = document.createElement('li')
@@ -77,13 +78,13 @@ app.controller('SettingsController', ['$scope', 'AppService', 'SettingsService',
     updateSongs(folders)
   }
 
-  function updateSongs(folders) {
+  function updateSongs (folders) {
     for (let i = 0; i < folders.length; i++) {
       processFolder(folders[i])
     }
   }
 
-  function processFolder(folder) {
+  function processFolder (folder) {
     var folderSeparator = ''
     if (folder.indexOf('/') >= 0) {
       folderSeparator = '/'
@@ -110,9 +111,7 @@ app.controller('SettingsController', ['$scope', 'AppService', 'SettingsService',
     })
   }
 
-  function getExtension(file) {
+  function getExtension (file) {
     return file.substr(file.lastIndexOf('.') + 1).trim()
   }
-
 }])
-
