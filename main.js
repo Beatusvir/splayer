@@ -3,10 +3,11 @@ require('electron-debug')
 const app = electron.app
 const BrowserWindow = electron.BrowserWindow
 const dialog = electron.dialog
-const AV = require('av')
-require('flac.js')
-require('mp3')
+const groove = require('groove')
 const fs = require('fs')
+const ini = require('ini')
+
+const defaultConfig = app.getPath('home') + '/.config/splayer.conf'
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -16,6 +17,45 @@ let settingsWindow
 
 global.songs = []
 global.folders = []
+
+function loadConfig(){
+  try{
+    console.log(defaultConfig)
+    var config = ini.parse(fs.readFileSync(defaultConfig, 'utf-8'))
+  }catch(err){
+    switch(err.errno){
+      case -2:
+        console.log('File not found, creating it')
+        initConfig()
+        break;
+      default:
+        console.log(err)
+    }
+  }
+}
+
+initConfig = () => {
+  var config = {}
+  groove.connectSoundBackend()
+  var devices = groove.getDevices()
+  var defaultDevice = devices.list[devices.defaultIndex]
+  console.log(defaultDevice.name)
+
+  config.audio = {}
+  config.audio.default = defaultDevice.name
+  fs.writeFileSync(defaultConfig, ini.stringify(config))
+}
+
+updateFolders = (folders) => {
+  var config = ini.parse(fs.readFileSync(defaultConfig, 'utf-8'))
+  var paths = []
+  for(let i = 0; i < folders.length; i++){
+    paths.push(folders[i])
+  }
+  config.mediaLibrary = {}
+  config.mediaLibrary.path = paths
+  fs.writeFileSync(defaultConfig, ini.stringify(config))
+}
 
 function createWindow () {
   mainWindow = new BrowserWindow({
@@ -78,6 +118,7 @@ function createSettingsWindow () {
 // Some APIs can only be used after this event occurs.
 app.on('ready', function () {
   createWindow()
+  loadConfig()
 })
 
 // Quit when all windows are closed.
@@ -133,22 +174,39 @@ ipcMain.on('show-file-dialog', (event, arg) => {
     properties: ['openFile', 'openDirectory', 'multiSelections']
   }, function (result) {
     global.folders = result
+    updateFolders(result)
     event.sender.send('show-file-dialog-callback', result)
   })
 })
 
 ipcMain.on('play-pause', function (event, songs) {
   try {
-    console.log('trying to play song: ' + global.songs[0])
-    var file = fs.readFileSync(songs[0])
-    // console.log('File read: ')
-    console.log(file)
-  // var player = AV.Player.fromFile(file)
-  // player.togglePlayback()
+    groove.setLogging(groove.LOG_WARNING)
+    // console.log('trying to play song: ' + global.songs[0])
+    // var currentFile = fs.readFileSync(songs[0])
+    // var currentFile = '/mnt/Music/Adele/19/Disc 1/Best For Last.mp3'
+    var currentFile = 'BestForLast.mp3'
+    groove.open(currentFile, (err, file) => {
+      playFile(file)
+    })
   } catch (err) {
+    console.log('Error in catch')
     console.log(err)
   }
 })
+
+playFile = (file) => {
+  // console.log(file.metadata())
+
+  var player = groove.createPlayer()
+  var playlist = groove.createPlaylist()
+
+  playlist.insert(file)
+  // player.attach(playlist, (err) => {
+  //   if (err) throw err
+  // })
+// console.log(groove.getDevices())
+}
 ipcMain.on('previous', function () {})
 ipcMain.on('next', function () {})
 ipcMain.on('stop', function () {})
